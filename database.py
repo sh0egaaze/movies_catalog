@@ -40,7 +40,7 @@ def top_five_movies() -> list[MovieData]:
 
 def show_by_genre(genre: str) -> list[MovieData]:
     conn = get_db()
-    rows = conn.execute('select * from movies where genre like ?', (genre,)).fetchall()
+    rows = conn.execute('select * from movies where genre like ?', (f'%{genre}%',)).fetchall()
     conn.close()
     list_rows = [dict(r) for r in rows]
     return list_rows
